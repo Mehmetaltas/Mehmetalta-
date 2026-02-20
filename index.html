@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>RiskLens Intelligence Platform</title>
+<title>RiskLens Platform</title>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -12,15 +11,15 @@
 
 body{
 margin:0;
+font-family:Arial;
 background:#0b1020;
 color:white;
-font-family:Arial;
 }
 
 .header{
 background:#111633;
-padding:20px;
-font-size:24px;
+padding:15px;
+font-size:22px;
 font-weight:bold;
 }
 
@@ -31,13 +30,13 @@ padding:20px;
 .card{
 background:#151a3a;
 padding:20px;
-margin-bottom:20px;
+margin-bottom:15px;
 border-radius:10px;
 }
 
 .value{
-font-size:28px;
-margin-top:10px;
+font-size:26px;
+margin-top:8px;
 }
 
 .green{color:#00ff88;}
@@ -51,12 +50,27 @@ padding:12px;
 border-radius:6px;
 font-weight:bold;
 margin-top:10px;
+cursor:pointer;
 }
 
-canvas{
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:6px;
+border:none;
+}
+
+#login{
+max-width:400px;
+margin:100px auto;
 background:#151a3a;
-padding:10px;
+padding:20px;
 border-radius:10px;
+}
+
+#dashboard{
+display:none;
 }
 
 </style>
@@ -65,8 +79,23 @@ border-radius:10px;
 
 <body>
 
+<div id="login">
+
+<h2>RiskLens Secure Access</h2>
+
+<input id="user" placeholder="Username">
+<input id="pass" type="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+<p id="error" style="color:red;"></p>
+
+</div>
+
+<div id="dashboard">
+
 <div class="header">
-RiskLens Intelligence Platform — Investor Demo
+RiskLens Intelligence Platform
 </div>
 
 <div class="container">
@@ -77,7 +106,7 @@ System Status
 </div>
 
 <div class="card">
-Global Risk Index
+Risk Index
 <div class="value yellow" id="risk">42</div>
 </div>
 
@@ -88,37 +117,59 @@ Threat Level
 </div>
 
 <div class="card">
-Risk Trend (Live Simulation)
+Risk Trend
 <canvas id="chart"></canvas>
+</div>
+
 </div>
 
 </div>
 
 <script>
 
-let data=[12,19,30,25,40,42];
+function login(){
 
-let chart=new Chart(
+let u=document.getElementById("user").value;
+let p=document.getElementById("pass").value;
+
+if(u==="admin" && p==="risklens"){
+
+document.getElementById("login").style.display="none";
+document.getElementById("dashboard").style.display="block";
+
+initChart();
+
+}
+else{
+
+document.getElementById("error").innerHTML="Access denied";
+
+}
+
+}
+
+let chart;
+let data=[12,19,30,25,42];
+
+function initChart(){
+
+chart=new Chart(
 document.getElementById('chart'),
 {
 type:'line',
 
 data:{
-labels:["T1","T2","T3","T4","T5","Now"],
-datasets:[
-{
+labels:["T1","T2","T3","T4","Now"],
+datasets:[{
 label:"Risk Index",
 data:data,
 borderColor:"#00ff88",
 tension:0.4
-}
-]
+}]
 },
 
 options:{
-plugins:{
-legend:{labels:{color:"white"}}
-},
+plugins:{legend:{labels:{color:"white"}}},
 scales:{
 x:{ticks:{color:"white"}},
 y:{ticks:{color:"white"}}
@@ -127,6 +178,8 @@ y:{ticks:{color:"white"}}
 
 }
 );
+
+}
 
 function simulate(){
 
@@ -143,7 +196,7 @@ document.getElementById("threat").innerHTML=threat;
 
 data.push(risk);
 
-if(data.length>10) data.shift();
+if(data.length>8) data.shift();
 
 chart.data.labels.push("Now");
 chart.data.labels.shift();
