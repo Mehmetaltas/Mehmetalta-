@@ -32,18 +32,23 @@ margin-bottom:15px;
 border-radius:8px;
 }
 
-.metric{
+.value{
 font-size:28px;
-color:#00ffaa;
-}
-
-.status{
-color:#00ffaa;
 font-weight:bold;
+margin-top:5px;
 }
 
-.alert{
-color:#ff4d4d;
+.green{color:#00ff88;}
+.red{color:#ff4d4d;}
+.yellow{color:#ffd166;}
+
+.button{
+background:#00ff88;
+color:black;
+padding:10px;
+border:none;
+border-radius:5px;
+margin-top:10px;
 font-weight:bold;
 }
 
@@ -59,35 +64,33 @@ RiskLens Universal Risk Intelligence Engine
 <div class="container">
 
 <div class="card">
-System Status: <span class="status">LIVE</span>
+System Status
+<div class="value green">OPERATIONAL</div>
 </div>
 
 <div class="card">
-Total Entities Monitored<br>
-<div class="metric">2,847</div>
+Global Risk Index
+<div class="value yellow" id="risk">42</div>
 </div>
 
 <div class="card">
-Active Risk Alerts<br>
-<div class="alert">12 High Risk Events</div>
+Active Monitoring Nodes
+<div class="value">128</div>
 </div>
 
 <div class="card">
-Fraud Probability Index<br>
-<div class="metric">0.27</div>
-</div>
-
-<div class="card">
-Global Coverage<br>
-72 Countries
-</div>
-
-<div class="card">
-Engine Mode<br>
-Autonomous Intelligence Active
+Threat Level
+<div class="value red" id="threat">LOW</div>
+<button class="button" onclick="simulate()">Run Simulation</button>
 </div>
 
 </div>
 
-</body>
-</html>
+<script>
+
+function simulate(){
+
+let risk=Math.floor(Math.random()*100);
+document.getElementById("risk").innerHTML=risk;
+
+let threat="LOW";
