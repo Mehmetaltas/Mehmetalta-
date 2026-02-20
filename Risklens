@@ -1,0 +1,113 @@
+index.html <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RiskLens Dashboard</title>
+
+<style>
+body {
+    margin:0;
+    font-family:system-ui;
+    background:#0b1020;
+    color:white;
+}
+
+.header {
+    background:#111a33;
+    padding:16px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.container {
+    padding:20px;
+}
+
+.card {
+    background:#111a33;
+    padding:20px;
+    margin-bottom:15px;
+    border-radius:10px;
+}
+
+.score {
+    font-size:48px;
+    font-weight:bold;
+}
+
+.low { color:#44d19e; }
+.medium { color:#ffd166; }
+.high { color:#ff5c7a; }
+
+button {
+    padding:12px 20px;
+    background:#7c9bff;
+    border:none;
+    color:white;
+    border-radius:6px;
+    font-size:16px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="header">
+RiskLens Risk Intelligence Dashboard
+</div>
+
+<div class="container">
+
+<div class="card">
+Case ID: RL-2026-001
+</div>
+
+<div class="card">
+Risk Score:
+<div id="score" class="score medium">52</div>
+</div>
+
+<div class="card">
+Decision:
+<div id="decision">Manual Review Required</div>
+</div>
+
+<div class="card">
+<button onclick="generate()">Run New Analysis</button>
+</div>
+
+</div>
+
+<script>
+
+function generate(){
+
+let score = Math.floor(Math.random()*100);
+
+let scoreElement = document.getElementById("score");
+let decisionElement = document.getElementById("decision");
+
+scoreElement.innerText = score;
+
+if(score < 40){
+scoreElement.className = "score low";
+decisionElement.innerText = "Approved";
+}
+
+else if(score < 70){
+scoreElement.className = "score medium";
+decisionElement.innerText = "Manual Review Required";
+}
+
+else{
+scoreElement.className = "score high";
+decisionElement.innerText = "Blocked — High Risk";
+}
+
+}
+
+</script>
+
+</body>
+</html>
