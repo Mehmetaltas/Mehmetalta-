@@ -3,123 +3,59 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Invoice RiskLens | Demo</title>
+  <title>Invoice RiskLens | AI Invoice Risk Intelligence Platform</title>
   <style>
-    :root { --max: 980px; }
-    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#fff; color:#111; }
-    header { padding:18px 14px; border-bottom:1px solid #eee; position:sticky; top:0; background:#fff; z-index:10; }
-    .wrap { max-width: var(--max); margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:10px; }
-    .brand { font-weight:800; letter-spacing:.2px; }
-    .lang { display:flex; gap:8px; }
-    .lang button { border:1px solid #ddd; background:#fff; padding:8px 10px; border-radius:10px; font-weight:600; cursor:pointer; }
-    .lang button.active { border-color:#111; }
-    main { padding:22px 14px 40px; }
-    .card { max-width: var(--max); margin:0 auto; border:1px solid #eee; border-radius:16px; padding:18px; box-shadow: 0 8px 30px rgba(0,0,0,.05); }
-    h1 { margin:0 0 8px; font-size:28px; line-height:1.1; }
-    p { margin:0 0 10px; color:#333; line-height:1.5; }
-    .row { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
-    a.btn { display:inline-flex; align-items:center; justify-content:center; padding:10px 14px; border-radius:12px; border:1px solid #111; text-decoration:none; font-weight:700; }
-    a.btn.primary { background:#111; color:#fff; }
-    a.btn.secondary { background:#fff; color:#111; }
-    .small { font-size:13px; color:#666; margin-top:8px; }
-    .frameWrap { margin-top:18px; border-radius:16px; overflow:hidden; border:1px solid #eee; }
-    iframe { width:100%; height: 1300px; border:0; }
-    @media (max-width: 480px){
-      h1 { font-size:24px; }
-      iframe { height: 1450px; }
-    }
+    body{font-family:Arial,system-ui; margin:0; background:#f4f6f8; color:#111;}
+    header{background:#0a2540; color:#fff; padding:26px 14px; text-align:center;}
+    .container{max-width:900px; margin:18px auto; background:#fff; padding:18px; border-radius:10px;}
+    h1,h2{margin:0 0 10px;}
+    p{margin:10px 0; line-height:1.55;}
+    .btn{display:inline-block; padding:12px 18px; background:#0a2540; color:#fff; text-decoration:none; border-radius:8px; font-weight:700;}
+    .note{color:#666; font-size:13px;}
+    iframe{width:100%; height:820px; border:0; border-radius:10px; margin-top:14px; background:#fff;}
+    footer{text-align:center; padding:18px; color:#666; font-size:12px;}
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <div class="brand">Invoice RiskLens</div>
-      <div class="lang">
-        <button id="btnTR" class="active" onclick="setLang('tr')">TR</button>
-        <button id="btnEN" onclick="setLang('en')">EN</button>
-      </div>
-    </div>
-  </header>
 
-  <main>
-    <div class="card">
-      <!-- TR -->
-      <div id="trBlock">
-        <h1>Fatura Yükle → Dolandırıcılık & Risk Analizi Al</h1>
-        <p>
-          Bu sayfa, yatırımcı ve kurumlar için demo amaçlıdır.
-          Aşağıdaki formdan faturayı yükleyin; RiskLens risk skoru + sahtecilik sinyallerini üretir.
-        </p>
+<header>
+  <h1>Invoice RiskLens</h1>
+  <p>AI-Powered Invoice Risk Intelligence Platform</p>
+  <p>Yapay Zeka Destekli Fatura Risk Analizi Platformu</p>
+</header>
 
-        <div class="row">
-          <a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLSciq-NMeKj54rH4V8AoQSDgfRVHyhXjuXVmBQwD-k2Al0tllw/viewform" target="_blank" rel="noopener">
-            Formu yeni sekmede aç
-          </a>
-          <a class="btn secondary" href="https://mehmetaltas.github.io/Mehmetalta-/" target="_blank" rel="noopener">
-            Ana Demo / Sunum
-          </a>
-        </div>
+<div class="container">
+  <h2>Upload Invoice / Fatura Yükle</h2>
+  <p>
+    <b>EN:</b> Upload your invoice to receive fraud detection and risk analysis.<br/>
+    <b>TR:</b> Faturanızı yükleyin, sahtecilik tespiti ve risk analizini anında alın.
+  </p>
 
-        <div class="small">
-          Not: RiskLens para vermez/kredi vermez; bankaya/faktoringe karar desteği sağlar.
-        </div>
-      </div>
+  <a class="btn" target="_blank" rel="noopener"
+     href="https://docs.google.com/forms/d/e/1FAIpQLSciq-NMeKj54rH4V8AoQSDgfRVHyhXjuXVmBQwD-k2Al0tllw/viewform">
+     Open Form in New Tab
+  </a>
 
-      <!-- EN -->
-      <div id="enBlock" style="display:none">
-        <h1>Upload Invoice → Get Fraud & Risk Analysis</h1>
-        <p>
-          This page is a demo for investors and financial institutions.
-          Upload an invoice via the form below; RiskLens generates a risk score and fraud signals.
-        </p>
+  <p class="note">Form aşağıda sayfanın içine gömülüdür (embedded).</p>
 
-        <div class="row">
-          <a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLSciq-NMeKj54rH4V8AoQSDgfRVHyhXjuXVmBQwD-k2Al0tllw/viewform" target="_blank" rel="noopener">
-            Open form in a new tab
-          </a>
-          <a class="btn secondary" href="https://mehmetaltas.github.io/Mehmetalta-/" target="_blank" rel="noopener">
-            Main Demo / Deck
-          </a>
-        </div>
+  <iframe
+    src="https://docs.google.com/forms/d/e/1FAIpQLSciq-NMeKj54rH4V8AoQSDgfRVHyhXjuXVmBQwD-k2Al0tllw/viewform?embedded=true"
+    loading="lazy"
+    title="Invoice RiskLens - Upload Invoice Form">
+  </iframe>
 
-        <div class="small">
-          Note: RiskLens does not lend money; it provides decision support to banks/factoring/funds.
-        </div>
-      </div>
+  <h2>How It Works / Nasıl Çalışır</h2>
+  <p>
+    • SME uploads invoice — KOBİ faturayı yükler<br/>
+    • AI analyzes fraud risk — Yapay zeka risk analizini yapar<br/>
+    • Risk score generated — Risk skoru oluşturulur<br/>
+    • Financial institutions can safely finance — Finans kurumları güvenle finansman sağlar
+  </p>
+</div>
 
-      <!-- Embedded Form -->
-      <div class="frameWrap">
-        <iframe
-          src="https://docs.google.com/forms/d/e/1FAIpQLSciq-NMeKj54rH4V8AoQSDgfRVHyhXjuXVmBQwD-k2Al0tllw/viewform?embedded=true"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Invoice RiskLens - Upload Invoice Form">
-        </iframe>
-      </div>
-    </div>
-  </main>
+<footer>
+  © 2026 Invoice RiskLens — AI Infrastructure for Banks, Funds, and Financial Institutions
+</footer>
 
-  <script>
-    function setLang(lang){
-      const tr = document.getElementById('trBlock');
-      const en = document.getElementById('enBlock');
-      const btr = document.getElementById('btnTR');
-      const ben = document.getElementById('btnEN');
-
-      if(lang === 'tr'){
-        tr.style.display = '';
-        en.style.display = 'none';
-        btr.classList.add('active');
-        ben.classList.remove('active');
-        document.documentElement.lang = 'tr';
-      } else {
-        tr.style.display = 'none';
-        en.style.display = '';
-        ben.classList.add('active');
-        btr.classList.remove('active');
-        document.documentElement.lang = 'en';
-      }
-    }
-  </script>
 </body>
 </html>
