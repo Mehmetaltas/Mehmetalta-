@@ -1,118 +1,293 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Invoice RiskLens | Demo</title>
+  <meta name="description" content="Upload invoice → get fraud detection & risk analysis. Demo page for investors and financial institutions." />
 
-<title>Invoice RiskLens | Fatura Risk Analizi</title>
-
-<style>
-
-body{
-font-family: Arial, sans-serif;
-margin:0;
-background:#f4f6f8;
-color:#111;
-}
-
-.container{
-max-width:900px;
-margin:auto;
-background:white;
-padding:30px;
-margin-top:20px;
-margin-bottom:20px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.05);
-}
-
-h1{
-font-size:28px;
-}
-
-h2{
-margin-top:40px;
-}
-
-.lang{
-float:right;
-font-weight:bold;
-}
-
-.note{
-margin-top:15px;
-padding:10px;
-background:#f0f4ff;
-border-left:4px solid #2962ff;
-}
-
-iframe{
-margin-top:20px;
-width:100%;
-height:900px;
-border:none;
-border-radius:10px;
-}
-
-footer{
-margin-top:30px;
-font-size:14px;
-color:#666;
-}
-
-</style>
-
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1a2e;
+      --soft:#13213b;
+      --text:#e8eefc;
+      --muted:#a9b8db;
+      --accent:#7c5cff;
+      --accent2:#38bdf8;
+      --border:rgba(255,255,255,.10);
+      --shadow: 0 12px 30px rgba(0,0,0,.35);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background: radial-gradient(1200px 800px at 20% 0%, rgba(124,92,255,.25), transparent 60%),
+                  radial-gradient(1000px 700px at 90% 10%, rgba(56,189,248,.18), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    a{color:inherit}
+    .wrap{max-width:1020px;margin:0 auto;padding:22px}
+    .top{
+      display:flex;gap:12px;align-items:center;justify-content:space-between;
+      margin-bottom:14px;
+    }
+    .brand{
+      display:flex;gap:12px;align-items:center;
+      padding:10px 12px;border:1px solid var(--border);border-radius:999px;
+      background:rgba(255,255,255,.04);
+      backdrop-filter: blur(8px);
+    }
+    .dot{
+      width:10px;height:10px;border-radius:99px;background:linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow:0 0 0 6px rgba(124,92,255,.12);
+    }
+    .brand b{letter-spacing:.2px}
+    .tabs{
+      display:flex;gap:8px;align-items:center;
+      border:1px solid var(--border);border-radius:999px;padding:6px;background:rgba(255,255,255,.04);
+    }
+    .tab{
+      border:0;background:transparent;color:var(--muted);
+      padding:8px 12px;border-radius:999px;cursor:pointer;font-weight:600;
+    }
+    .tab.active{background:linear-gradient(135deg, rgba(124,92,255,.28), rgba(56,189,248,.18)); color:var(--text)}
+    .hero{
+      border:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+      overflow:hidden;
+    }
+    h1{margin:6px 0 6px;font-size:24px;line-height:1.2}
+    .sub{color:var(--muted);margin:0 0 12px}
+    .badges{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
+    .badge{
+      font-size:13px;color:var(--muted);
+      border:1px solid var(--border);background:rgba(255,255,255,.03);
+      padding:6px 10px;border-radius:999px
+    }
+    .ctaRow{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 4px}
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:10px 12px;border-radius:12px;
+      text-decoration:none;font-weight:700;
+    }
+    .btn.primary{
+      background:linear-gradient(135deg, rgba(124,92,255,.35), rgba(56,189,248,.22));
+      border-color:rgba(124,92,255,.35);
+    }
+    .note{
+      margin-top:12px;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(56,189,248,.25);
+      background:rgba(56,189,248,.08);
+      color:var(--text);
+    }
+    .grid{
+      display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin-top:14px
+    }
+    @media (max-width: 900px){
+      .grid{grid-template-columns:1fr}
+    }
+    .card{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.03);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px;
+      overflow:hidden;
+    }
+    .card h2{margin:0 0 8px;font-size:18px}
+    .muted{color:var(--muted)}
+    .iframeWrap{
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow:hidden;
+      background:#fff;
+    }
+    iframe{
+      width:100%;
+      height:900px;
+      border:0;
+      display:block;
+    }
+    .footer{
+      margin:16px 0 4px;
+      color:rgba(233,240,255,.55);
+      font-size:12px;
+      text-align:center;
+    }
+    .small{font-size:13px}
+    ul{margin:10px 0 0 18px}
+  </style>
 </head>
 
 <body>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <span class="dot"></span>
+        <div>
+          <b>Invoice RiskLens</b><div class="small muted">Investor Demo</div>
+        </div>
+      </div>
 
-<div class="container">
+      <div class="tabs" role="tablist" aria-label="Language">
+        <button class="tab active" id="tabTR" role="tab" aria-selected="true" aria-controls="panelTR">TR</button>
+        <button class="tab" id="tabEN" role="tab" aria-selected="false" aria-controls="panelEN">EN</button>
+      </div>
+    </div>
 
-<div class="lang">TR | EN</div>
+    <section class="hero">
+      <!-- TR -->
+      <div id="panelTR" role="tabpanel" aria-labelledby="tabTR">
+        <h1>Fatura Yükle → Dolandırıcılık & Risk Analizi Al</h1>
+        <p class="sub">
+          Bu sayfa yatırımcılar ve finans kurumları için demo amaçlıdır.
+          Aşağıdaki formdan faturayı yükleyin; RiskLens risk skoru + sahtecilik sinyallerini üretir.
+        </p>
 
-<h1>Invoice RiskLens</h1>
+        <div class="badges">
+          <span class="badge">KOBİ / B2B</span>
+          <span class="badge">Fraud + Risk Skoru</span>
+          <span class="badge">AML/KYC Uyumlu Mimari</span>
+          <span class="badge">Banka / Faktoring / Fon</span>
+        </div>
 
-<h2>Fatura Yükle → Dolandırıcılık & Risk Analizi Al</h2>
+        <div class="ctaRow">
+          <a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLSciq-NMeKj54rH4V8AoQSDgfRVHyhXjuXVmBQwD-k2Al0tllw/viewform"
+             target="_blank" rel="noopener">Formu yeni sekmede aç</a>
 
-<p>
-Bu sayfa yatırımcılar, bankalar ve finans kurumları için demo amaçlıdır.
-Faturanızı aşağıdan yükleyin; RiskLens sahtecilik sinyalleri ve risk skoru üretir.
-</p>
+          <!-- Buraya ana sunum/demonun linkini yaz -->
+          <a class="btn" href="https://mehmetaltas.github.io/Mehmetalta-/" target="_blank" rel="noopener">Ana Demo / Sunum</a>
+        </div>
 
-<div class="note">
-RiskLens kredi vermez, para ödemez.  
-Sadece bankalara, faktoring şirketlerine ve yatırım fonlarına karar desteği sağlar.
-</div>
+        <div class="note">
+          <b>Not:</b> RiskLens <b>para vermez</b>, <b>kredi vermez</b>. Banka/faktoring/fon gibi finans kurumlarına
+          <b>karar destek</b> sağlar.
+        </div>
+      </div>
 
+      <!-- EN -->
+      <div id="panelEN" role="tabpanel" aria-labelledby="tabEN" style="display:none">
+        <h1>Upload Invoice → Get Fraud Detection & Risk Analysis</h1>
+        <p class="sub">
+          This page is a demo for investors and financial institutions.
+          Upload an invoice via the form below; RiskLens generates a risk score and fraud signals.
+        </p>
 
-<h2>Upload Invoice → Get Fraud & Risk Analysis</h2>
+        <div class="badges">
+          <span class="badge">SME / B2B</span>
+          <span class="badge">Fraud + Risk Scoring</span>
+          <span class="badge">AML/KYC-ready architecture</span>
+          <span class="badge">Banks / Factoring / Funds</span>
+        </div>
 
-<p>
-This demo is designed for investors, banks and financial institutions.
-Upload your invoice below; RiskLens generates fraud signals and a risk score.
-</p>
+        <div class="ctaRow">
+          <a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLSciq-NMeKj54rH4V8AoQSDgfRVHyhXjuXVmBQwD-k2Al0tllw/viewform"
+             target="_blank" rel="noopener">Open form in a new tab</a>
 
-<div class="note">
-RiskLens does not lend money or finance invoices.  
-It provides risk intelligence to banks, factoring companies and funds.
-</div>
+          <!-- Main demo/deck link -->
+          <a class="btn" href="https://mehmetaltas.github.io/Mehmetalta-/" target="_blank" rel="noopener">Main Demo / Deck</a>
+        </div>
 
+        <div class="note">
+          <b>Note:</b> RiskLens does <b>not</b> lend money or provide credit.
+          It is a <b>decision-support</b> layer for banks/factoring/funds.
+        </div>
+      </div>
+    </section>
 
-<h2>Upload Invoice / Fatura Yükle</h2>
+    <section class="grid">
+      <div class="card">
+        <h2>Upload Invoice / Fatura Yükle</h2>
+        <p class="muted" style="margin-top:0">
+          Form görünmezse “Formu yeni sekmede aç / Open in a new tab” butonunu kullan.
+        </p>
 
-<iframe
-src="https://docs.google.com/forms/d/e/1FAIpQLSciq-NMeKj54rH4V8AoQSDgfRVHyhXjuXVmBQwD-k2Al0tllw/viewform?embedded=true">
-</iframe>
+        <div class="iframeWrap" aria-label="Google Form Embed">
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSciq-NMeKj54rH4V8AoQSDgfRVHyhXjuXVmBQwD-k2Al0tllw/viewform?embedded=true"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
 
+      <div class="card">
+        <h2>How it works / Nasıl çalışır</h2>
 
-<footer>
+        <div id="howTR">
+          <p class="muted" style="margin:0 0 8px">
+            Akış (özet):
+          </p>
+          <ul>
+            <li>KOBİ vadeli faturayı yükler</li>
+            <li>RiskLens: sahtecilik sinyalleri + risk skoru üretir</li>
+            <li>Skor finans kurumuna sunulur (banka/faktoring/fon)</li>
+            <li>Ödeme kararı finans kurumundadır</li>
+          </ul>
+        </div>
 
-© 2026 Invoice RiskLens  
-Risk Intelligence Infrastructure for Financial Institutions
+        <div id="howEN" style="display:none">
+          <p class="muted" style="margin:0 0 8px">
+            Flow (summary):
+          </p>
+          <ul>
+            <li>SME uploads a deferred invoice</li>
+            <li>RiskLens generates fraud signals + risk score</li>
+            <li>Score is presented to a financial institution (bank/factoring/fund)</li>
+            <li>Payment decision stays with the institution</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-</footer>
+    <div class="footer">© 2026 Invoice RiskLens — Demo</div>
+  </div>
 
-</div>
+  <script>
+    const tabTR = document.getElementById("tabTR");
+    const tabEN = document.getElementById("tabEN");
+    const panelTR = document.getElementById("panelTR");
+    const panelEN = document.getElementById("panelEN");
+    const howTR = document.getElementById("howTR");
+    const howEN = document.getElementById("howEN");
 
+    function setLang(lang){
+      const isTR = lang === "tr";
+      tabTR.classList.toggle("active", isTR);
+      tabEN.classList.toggle("active", !isTR);
+
+      tabTR.setAttribute("aria-selected", isTR ? "true" : "false");
+      tabEN.setAttribute("aria-selected", !isTR ? "true" : "false");
+
+      panelTR.style.display = isTR ? "" : "none";
+      panelEN.style.display = isTR ? "none" : "";
+
+      howTR.style.display = isTR ? "" : "none";
+      howEN.style.display = isTR ? "none" : "";
+      document.documentElement.lang = isTR ? "tr" : "en";
+
+      try { localStorage.setItem("risklens_lang", lang); } catch(e){}
+    }
+
+    tabTR.addEventListener("click", ()=>setLang("tr"));
+    tabEN.addEventListener("click", ()=>setLang("en"));
+
+    // restore saved language
+    try {
+      const saved = localStorage.getItem("risklens_lang");
+      if(saved === "en") setLang("en");
+    } catch(e){}
+  </script>
 </body>
-</html>
+  </html>
