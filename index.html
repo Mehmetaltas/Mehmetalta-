@@ -4,31 +4,240 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Invoice RiskLens | Demo</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#111a2e;
+      --text:#e8eefc;
+      --muted:#b7c2df;
+      --accent:#4c7dff;
+      --good:#00d4aa;
+      --border:rgba(255,255,255,.10);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background: radial-gradient(1200px 700px at 20% -10%, rgba(76,125,255,.25), transparent 60%),
+                  radial-gradient(900px 700px at 110% 10%, rgba(0,212,170,.18), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+    .wrap{max-width:1000px;margin:0 auto;padding:22px}
+    .top{
+      display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+      padding:12px 0;
+    }
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo{
+      width:40px;height:40px;border-radius:14px;
+      background:linear-gradient(135deg,var(--accent),var(--good));
+      box-shadow:var(--shadow);
+    }
+    .brand b{font-size:16px;letter-spacing:.2px}
+    .lang{
+      display:flex;gap:8px;align-items:center;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.05);
+      padding:6px;border-radius:999px;
+    }
+    .chip{
+      border:0;background:transparent;color:var(--muted);
+      padding:8px 12px;border-radius:999px;cursor:pointer;font-weight:700;
+    }
+    .chip.active{background:rgba(76,125,255,.22);color:var(--text)}
+    .card{
+      background:rgba(17,26,46,.88);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+      margin:14px 0;
+    }
+    h1{margin:0 0 6px;font-size:26px}
+    h2{margin:0 0 10px;font-size:18px}
+    p{margin:8px 0;color:var(--muted)}
+    .row{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
+    @media (max-width: 900px){.row{grid-template-columns:1fr}}
+    .btnRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    a.btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      padding:10px 12px;border-radius:12px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      text-decoration:none;
+      font-weight:800;
+    }
+    a.btn.primary{background:rgba(76,125,255,.22);border-color:rgba(76,125,255,.45)}
+    .note{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px dashed rgba(255,255,255,.16);
+      background:rgba(0,0,0,.18);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+    @media (max-width: 900px){.kpis{grid-template-columns:1fr}}
+    .mini{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      border-radius:14px;
+      padding:12px;
+    }
+    .mini .t{font-size:12px;color:var(--muted);margin-bottom:4px}
+    .mini .v{font-size:16px;font-weight:900;color:var(--text)}
+    .result{
+      display:flex;gap:18px;align-items:center;flex-wrap:wrap;
+      border:1px solid rgba(0,212,170,.25);
+      background:rgba(0,212,170,.08);
+      border-radius:14px;
+      padding:14px;
+      margin-top:12px;
+    }
+    .score{
+      font-size:56px;font-weight:1000;line-height:1;color:var(--good);
+      letter-spacing:-1px;
+    }
+    .label{font-size:18px;font-weight:900;color:var(--good)}
+    .small{font-size:13px;color:rgba(232,238,252,.72)}
+    .iframeWrap{
+      margin-top:12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow:hidden;
+      background:#fff;
+    }
+    iframe{width:100%;height:980px;border:0;display:block}
+    @media (max-width: 480px){iframe{height:1100px}}
+    footer{margin:16px 0 6px;text-align:center;color:rgba(233,240,255,.55);font-size:12px}
+    .hide{display:none}
+  </style>
 </head>
-<body style="font-family:Arial,system-ui;margin:0;background:#0b1220;color:#fff;">
-  <div style="max-width:900px;margin:18px auto;padding:18px;">
-    <div style="background:#111a2e;border-radius:12px;padding:18px;margin-bottom:14px;">
-      <h1 style="margin:0 0 8px;">Invoice RiskLens — Demo</h1>
-      <p style="margin:0;opacity:.85">Upload invoice → get risk score + fraud signals (decision support, not lending).</p>
-      <p style="margin:10px 0 0;opacity:.75;font-size:13px">
-        Not: RiskLens para vermez/kredi vermez; banka/faktoring/fon için karar destek sağlar.
-      </p>
-      <p style="margin:10px 0 0;">
-        <a style="color:#9bb4ff" target="_blank" rel="noopener"
-           href="https://docs.google.com/forms/d/e/1FAIpQLSciq-NMeKj54rH4V8AoQSDgfRVHyhXjuXVmBQwD-k2Al0tllw/viewform">
-          ➜ Formu yeni sekmede aç / Open in a new tab
-        </a>
-      </p>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <b>Invoice RiskLens</b>
+          <div class="small">Investor Demo • TR/EN</div>
+        </div>
+      </div>
+      <div class="lang">
+        <button class="chip active" id="btnTR" type="button">TR</button>
+        <button class="chip" id="btnEN" type="button">EN</button>
+      </div>
     </div>
 
-    <div style="background:#111a2e;border-radius:12px;padding:18px;">
-      <h2 style="margin:0 0 12px;">Upload Invoice / Fatura Yükle</h2>
-      <iframe
-        src="https://docs.google.com/forms/d/e/1FAIpQLSciq-NMeKj54rH4V8AoQSDgfRVHyhXjuXVmBQwD-k2Al0tllw/viewform?embedded=true"
-        style="width:100%;height:980px;border:0;border-radius:12px;background:#fff;"
-        loading="lazy"
-        title="Invoice RiskLens Form"></iframe>
+    <div class="card">
+      <div id="TR">
+        <h1>Fatura Yükle → Dolandırıcılık & Risk Analizi Al</h1>
+        <p>Bu sayfa yatırımcılar ve finans kurumları için demo amaçlıdır. RiskLens risk skoru + sahtecilik sinyalleri üretir.</p>
+
+        <div class="kpis">
+          <div class="mini"><div class="t">Rol</div><div class="v">Karar Destek</div></div>
+          <div class="mini"><div class="t">Çıktılar</div><div class="v">Risk Skoru + Fraud</div></div>
+          <div class="mini"><div class="t">Ödeme</div><div class="v">RiskLens ödeme yapmaz</div></div>
+        </div>
+
+        <!-- Risk Score Demo Result (TR) -->
+        <div class="result">
+          <div class="score">85</div>
+          <div>
+            <div class="label">DÜŞÜK RİSK (LOW RISK)</div>
+            <div class="small">
+              Dolandırıcılık Olasılığı: %8 • Fatura Doğruluğu: Onaylandı • Alıcı Risk Seviyesi: Düşük<br/>
+              Öneri: Finansman için uygun (kurum kararı)
+            </div>
+          </div>
+        </div>
+
+        <div class="note">
+          Not: RiskLens para vermez / kredi vermez. Banka, faktoring, fon veya katılım bankasına risk ve sahtecilik analizi ile karar desteği sağlar.
+        </div>
+
+        <div class="btnRow">
+          <a class="btn primary" target="_blank" rel="noopener"
+             href="https://docs.google.com/forms/d/e/1FAIpQLSciq-NMeKj54rH4V8AoQSDgfRVHyhXjuXVmBQwD-k2Al0tllw/viewform">
+            Formu yeni sekmede aç
+          </a>
+        </div>
+      </div>
+
+      <div id="EN" class="hide">
+        <h1>Upload Invoice → Get Fraud & Risk Analysis</h1>
+        <p>This is a demo for investors and financial institutions. RiskLens generates a risk score and fraud signals.</p>
+
+        <div class="kpis">
+          <div class="mini"><div class="t">Role</div><div class="v">Decision Support</div></div>
+          <div class="mini"><div class="t">Outputs</div><div class="v">Risk Score + Fraud</div></div>
+          <div class="mini"><div class="t">Funding</div><div class="v">RiskLens does not fund</div></div>
+        </div>
+
+        <!-- Risk Score Demo Result (EN) -->
+        <div class="result">
+          <div class="score">85</div>
+          <div>
+            <div class="label">LOW RISK</div>
+            <div class="small">
+              Fraud Probability: 8% • Invoice Authenticity: Verified • Buyer Risk Level: Low<br/>
+              Recommendation: Eligible for financing (institution decides)
+            </div>
+          </div>
+        </div>
+
+        <div class="note">
+          Note: RiskLens does not lend money. It provides risk & fraud analytics to support decisions of banks, factoring firms, funds, and Islamic finance institutions.
+        </div>
+
+        <div class="btnRow">
+          <a class="btn primary" target="_blank" rel="noopener"
+             href="https://docs.google.com/forms/d/e/1FAIpQLSciq-NMeKj54rH4V8AoQSDgfRVHyhXjuXVmBQwD-k2Al0tllw/viewform">
+            Open form in a new tab
+          </a>
+        </div>
+      </div>
     </div>
+
+    <div class="card">
+      <h2>Upload Invoice / Fatura Yükle</h2>
+      <p>Form mobilde sorun çıkarırsa yukarıdaki “yeni sekmede aç” butonunu kullan.</p>
+      <div class="iframeWrap">
+        <iframe
+          src="https://docs.google.com/forms/d/e/1FAIpQLSciq-NMeKj54rH4V8AoQSDgfRVHyhXjuXVmBQwD-k2Al0tllw/viewform?embedded=true"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Invoice RiskLens Form">
+        </iframe>
+      </div>
+    </div>
+
+    <footer>© 2026 Invoice RiskLens — Demo</footer>
   </div>
+
+  <script>
+    const btnTR = document.getElementById('btnTR');
+    const btnEN = document.getElementById('btnEN');
+    const TR = document.getElementById('TR');
+    const EN = document.getElementById('EN');
+
+    btnTR.addEventListener('click', () => {
+      btnTR.classList.add('active'); btnEN.classList.remove('active');
+      TR.classList.remove('hide'); EN.classList.add('hide');
+      document.documentElement.lang = 'tr';
+    });
+
+    btnEN.addEventListener('click', () => {
+      btnEN.classList.add('active'); btnTR.classList.remove('active');
+      EN.classList.remove('hide'); TR.classList.add('hide');
+      document.documentElement.lang = 'en';
+    });
+  </script>
 </body>
-</html>
+  </html>
