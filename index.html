@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="tr">
+<html lang="en">
 <head>
 
 <meta charset="UTF-8">
@@ -12,7 +12,7 @@
 body{
 background:#0b1220;
 color:#eaf1ff;
-font-family:Arial, sans-serif;
+font-family:Arial;
 margin:0;
 padding:20px;
 }
@@ -32,11 +32,6 @@ margin-bottom:20px;
 .logo{
 width:80px;
 height:80px;
-margin-bottom:10px;
-}
-
-h1,h2{
-margin-top:0;
 }
 
 .badge{
@@ -55,21 +50,13 @@ border-radius:12px;
 margin-top:10px;
 }
 
-.email{
-background:#0b1220;
-padding:10px;
-border-radius:8px;
-display:inline-block;
-margin-top:10px;
-}
-
 .button{
-display:inline-block;
-padding:10px;
 background:#4c7dff;
 color:white;
+padding:10px;
 text-decoration:none;
 border-radius:8px;
+display:inline-block;
 margin-top:10px;
 }
 
@@ -93,26 +80,37 @@ font-weight:bold;
 <span class="lang" onclick="toggleLang()">TR / EN</span>
 
 <svg class="logo" viewBox="0 0 100 100">
+
 <circle cx="50" cy="50" r="40" stroke="#4c7dff" stroke-width="4" fill="none"/>
+
 <circle cx="50" cy="50" r="20" fill="#4c7dff"/>
+
 <line x1="70" y1="70" x2="90" y2="90" stroke="#4c7dff" stroke-width="6"/>
+
 </svg>
 
-<h1>RiskLens</h1>
+<h1 id="title">RiskLens</h1>
 
 <p id="subtitle">
 Global Risk Intelligence Infrastructure
 </p>
 
 <p id="desc">
+
 RiskLens is a global risk intelligence infrastructure company.
+
 RiskLens analyzes invoices, detects fraud, and produces risk scores for financial institutions.
-RiskLens does not lend money.
-RiskLens provides risk intelligence infrastructure.
+
+RiskLens does not lend money and does not finance transactions.
+
+RiskLens provides core infrastructure for banks, fintech companies, and financial institutions worldwide.
+
 </p>
 
 <p id="infra">
-RiskLens is designed to become core infrastructure used by banks, financial institutions, and fintech platforms worldwide.
+
+RiskLens is designed to become core financial infrastructure globally.
+
 </p>
 
 <div class="badge">
@@ -122,6 +120,7 @@ Risk Score Example: 85 / LOW RISK
 </div>
 
 
+
 <div class="card">
 
 <h2 id="whyTitle">Why RiskLens Exists</h2>
@@ -129,13 +128,15 @@ Risk Score Example: 85 / LOW RISK
 <p id="whyText">
 
 Global financial institutions process trillions of dollars annually.
-Fraud, fake invoices, and risk uncertainty create billions in losses.
 
-RiskLens solves this problem by providing risk intelligence infrastructure.
+Fraud and risk uncertainty create billions in losses.
+
+RiskLens solves this by providing risk intelligence infrastructure.
 
 </p>
 
 </div>
+
 
 
 <div class="card">
@@ -144,99 +145,60 @@ RiskLens solves this problem by providing risk intelligence infrastructure.
 
 <p id="marketText">
 
-Global invoice financing volume exceeds $3 trillion annually.
+Global invoice financing exceeds $3 trillion annually.
 
-Risk intelligence infrastructure demand is increasing due to global regulations.
-
-RiskLens targets banks, fintech companies, and financial institutions globally.
+Risk intelligence infrastructure demand is increasing globally.
 
 </p>
 
 </div>
 
 
-<div class="card">
-
-<h2 id="platformTitle">RiskLens Platform Vision</h2>
-
-<p id="platformText">
-
-RiskLens is not a single product.
-RiskLens is a global infrastructure platform.
-
-</p>
-
-<ul>
-
-<li>Invoice Risk Intelligence</li>
-
-<li>Fraud Detection Infrastructure</li>
-
-<li>Bank Risk Intelligence</li>
-
-<li>Islamic Finance Compliance</li>
-
-<li>Cybersecurity Risk Monitoring</li>
-
-<li>Crypto Risk Intelligence</li>
-
-</ul>
-
-</div>
-
 
 <div class="card">
 
-<h2 id="revenueTitle">Revenue Scalability</h2>
+<h2 id="revenueTitle">Revenue Model</h2>
 
-<ul>
+<ul id="revenueList">
 
-<li>Enterprise licensing</li>
+<li>Bank licensing</li>
 
 <li>API licensing</li>
 
-<li>Infrastructure licensing</li>
-
 <li>Risk intelligence licensing</li>
 
-</ul>
+<li>Fraud detection licensing</li>
 
-<p>
-Recurring scalable global revenue model.
-</p>
+</ul>
 
 </div>
 
 
+
 <div class="card">
 
-<h2 id="pdfTitle">Investor Pitch Deck</h2>
+<h2 id="pdfTitle">Investor Presentation</h2>
 
 <iframe src="https://drive.google.com/file/d/1mbKvLr0G_hglcCIttU68LiJ-sh-Ws4Mz/preview"></iframe>
 
 </div>
 
 
+
 <div class="card">
 
-<h2>Contact</h2>
+<h2 id="contactTitle">Contact</h2>
 
-<div class="email">
+<p>
 42mehmetaltas@gmail.com
-</div>
-
-<br>
-
-<a class="button"
-href="https://mehmetaltas.github.io/invoice-risklens/"
-target="_blank">
-Open Live Demo
-</a>
+</p>
 
 </div>
 
 
+
 </div>
+
 
 
 <script>
@@ -251,25 +213,39 @@ document.getElementById("subtitle").innerHTML=
 "Küresel Risk Zekası Altyapısı";
 
 document.getElementById("desc").innerHTML=
-"RiskLens küresel risk altyapısıdır. Faturaları analiz eder ve risk skoru üretir.";
+
+"RiskLens küresel risk zekası altyapısıdır. Faturaları analiz eder, sahteciliği tespit eder ve risk skoru üretir. RiskLens kredi vermez.";
 
 document.getElementById("infra").innerHTML=
-"RiskLens küresel finans altyapısı olarak tasarlanmıştır.";
+
+"RiskLens bankalar ve finans kurumları için küresel altyapı olarak tasarlanmıştır.";
 
 document.getElementById("whyTitle").innerHTML=
 "RiskLens Neden Var";
 
+document.getElementById("whyText").innerHTML=
+
+"Küresel finans kurumları her yıl trilyonlarca dolar işlem yapmaktadır. Sahtecilik ve risk büyük kayıplara neden olmaktadır.";
+
 document.getElementById("marketTitle").innerHTML=
 "Pazar Fırsatı";
 
-document.getElementById("platformTitle").innerHTML=
-"Platform Vizyonu";
+document.getElementById("marketText").innerHTML=
+
+"Küresel fatura finansmanı hacmi 3 trilyon doları aşmaktadır.";
 
 document.getElementById("revenueTitle").innerHTML=
 "Gelir Modeli";
 
+document.getElementById("revenueList").innerHTML=
+
+"<li>Banka lisansları</li><li>API lisansları</li><li>Risk analizi lisansları</li><li>Sahtecilik tespiti lisansları</li>";
+
 document.getElementById("pdfTitle").innerHTML=
 "Yatırımcı Sunumu";
+
+document.getElementById("contactTitle").innerHTML=
+"İletişim";
 
 lang="tr";
 
@@ -282,6 +258,7 @@ location.reload();
 }
 
 </script>
+
 
 </body>
 </html>
