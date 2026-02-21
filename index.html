@@ -35,52 +35,141 @@
       height: 600px;
       border: none;
     }
+    .lang {
+      display: none;
+    }
+    .lang.active {
+      display: block;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Invoice RiskLens</h1>
-    <h2>Investor Demo</h2>
-
-    <p>Invoice RiskLens, finans kurumları ve katılım bankaları için geliştirilmiş bir altyapıdır. Risk skorlama, sahte fatura analizi ve karar destek sistemi sağlar.</p>
-
-    <h3>Risk Score Simülasyonu</h3>
-    <form>
-      <label for="invoiceAmount">Fatura Tutarı:</label>
-      <input type="number" id="invoiceAmount" name="amount" required><br><br>
-      
-      <label for="invoiceDate">Fatura Tarihi:</label>
-      <input type="date" id="invoiceDate" name="date" required><br><br>
-      
-      <label for="companyName">Şirket Adı:</label>
-      <input type="text" id="companyName" name="company" required><br><br>
-
-      <button type="submit" class="btn">Risk Skorunu Hesapla</button>
-    </form>
-
-    <div id="riskScoreResult">
-      <p><strong>Risk Skoru:</strong> <span id="riskScore">Henüz hesaplanmadı</span></p>
+    <div class="topbar">
+      <button class="btn" id="btnTR">Türkçe</button>
+      <button class="btn" id="btnEN">English</button>
     </div>
 
-    <h3>PDF Pitch İndir</h3>
-    <a href="link_to_pitch_document.pdf" download>
-      <button class="btn">PDF Olarak İndir</button>
-    </a>
+    <!-- Türkçe İçerik -->
+    <div class="lang tr active">
+      <h1>Invoice RiskLens</h1>
+      <h2>Yatırımcı Demo</h2>
+      <p>
+        Invoice RiskLens, finans kurumları ve katılım bankaları için geliştirilmiş bir altyapıdır. Risk skorlama, sahte fatura analizi ve karar destek sistemi sağlar.
+      </p>
 
-    <h3>Google Drive Dosyasını Görüntüle</h3>
-    <iframe src="https://drive.google.com/file/d/1mbKvLr0G_hglcCIttU68LiJ-sh-Ws4Mz/preview"></iframe>
+      <!-- Risk Skoru Simülasyonu -->
+      <h3>Risk Skoru Simülasyonu</h3>
+      <form>
+        <label for="invoiceAmount">Fatura Tutarı:</label>
+        <input type="number" id="invoiceAmount" name="amount" required><br><br>
+
+        <label for="invoiceDate">Fatura Tarihi:</label>
+        <input type="date" id="invoiceDate" name="date" required><br><br>
+
+        <label for="companyName">Şirket Adı:</label>
+        <input type="text" id="companyName" name="company" required><br><br>
+
+        <button type="submit" class="btn">Risk Skorunu Hesapla</button>
+      </form>
+
+      <div id="riskScoreResult">
+        <p><strong>Risk Skoru:</strong> <span id="riskScore">Henüz hesaplanmadı</span></p>
+      </div>
+
+      <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+          e.preventDefault();
+          var amount = document.getElementById('invoiceAmount').value;
+          var date = document.getElementById('invoiceDate').value;
+          var company = document.getElementById('companyName').value;
+
+          // Basit bir risk hesaplaması simülasyonu
+          var riskScore = Math.random() * 100;
+          document.getElementById('riskScore').textContent = riskScore.toFixed(2);
+        });
+      </script>
+
+      <!-- PDF Pitch Download -->
+      <h3>Yatırımcı Pitch PDF</h3>
+      <a href="https://drive.google.com/uc?export=download&id=1mbKvLr0G_hglcCIttU68LiJ-sh-Ws4Mz">
+        <button class="btn">PDF Olarak İndir</button>
+      </a>
+
+      <!-- Google Drive Dosyasını Görüntüle -->
+      <h3>Proje Sunum Dosyasını Görüntüle</h3>
+      <iframe src="https://drive.google.com/file/d/1mbKvLr0G_hglcCIttU68LiJ-sh-Ws4Mz/preview"></iframe>
+    </div>
+
+    <!-- English Content -->
+    <div class="lang en">
+      <h1>Invoice RiskLens</h1>
+      <h2>Investor Demo</h2>
+      <p>
+        Invoice RiskLens provides risk scoring, fraud analysis, and decision support infrastructure for financial institutions and Islamic banks.
+      </p>
+
+      <!-- Risk Score Simulation -->
+      <h3>Risk Score Simulation</h3>
+      <form>
+        <label for="invoiceAmount">Invoice Amount:</label>
+        <input type="number" id="invoiceAmountEN" name="amount" required><br><br>
+
+        <label for="invoiceDate">Invoice Date:</label>
+        <input type="date" id="invoiceDateEN" name="date" required><br><br>
+
+        <label for="companyName">Company Name:</label>
+        <input type="text" id="companyNameEN" name="company" required><br><br>
+
+        <button type="submit" class="btn">Calculate Risk Score</button>
+      </form>
+
+      <div id="riskScoreResultEN">
+        <p><strong>Risk Score:</strong> <span id="riskScoreEN">Not calculated yet</span></p>
+      </div>
+
+      <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+          e.preventDefault();
+          var amount = document.getElementById('invoiceAmountEN').value;
+          var date = document.getElementById('invoiceDateEN').value;
+          var company = document.getElementById('companyNameEN').value;
+
+          // Simple risk score simulation
+          var riskScore = Math.random() * 100;
+          document.getElementById('riskScoreEN').textContent = riskScore.toFixed(2);
+        });
+      </script>
+
+      <!-- PDF Pitch Download -->
+      <h3>Investor Pitch PDF</h3>
+      <a href="https://drive.google.com/uc?export=download&id=1mbKvLr0G_hglcCIttU68LiJ-sh-Ws4Mz">
+        <button class="btn">Download as PDF</button>
+      </a>
+
+      <!-- Google Drive File Preview -->
+      <h3>View Project Presentation File</h3>
+      <iframe src="https://drive.google.com/file/d/1mbKvLr0G_hglcCIttU68LiJ-sh-Ws4Mz/preview"></iframe>
+    </div>
+
+    <!-- Footer -->
+    <div style="margin-top:30px; text-align:center; color:gray">
+      <p>&copy; 2026 Invoice RiskLens | Investor Demo</p>
+    </div>
   </div>
 
   <script>
-    document.querySelector('form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      var amount = document.getElementById('invoiceAmount').value;
-      var date = document.getElementById('invoiceDate').value;
-      var company = document.getElementById('companyName').value;
+    const btnTR = document.getElementById('btnTR');
+    const btnEN = document.getElementById('btnEN');
 
-      // Basit bir risk hesaplaması simülasyonu
-      var riskScore = Math.random() * 100;
-      document.getElementById('riskScore').textContent = riskScore.toFixed(2);
+    btnTR.addEventListener('click', function() {
+      document.querySelector('.tr').classList.add('active');
+      document.querySelector('.en').classList.remove('active');
+    });
+
+    btnEN.addEventListener('click', function() {
+      document.querySelector('.en').classList.add('active');
+      document.querySelector('.tr').classList.remove('active');
     });
   </script>
 </body>
