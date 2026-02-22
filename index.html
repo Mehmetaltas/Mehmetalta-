@@ -1,702 +1,528 @@
 <!doctype html>
-<html lang="en">
+<html lang="tr">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>RiskLens | Global Risk Intelligence Infrastructure</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RiskLens — Invoice Risk & Fraud Intelligence (TR/EN)</title>
+  <meta name="description" content="RiskLens: Invoice fraud detection, risk scoring, Islamic finance compliant decision-support infrastructure for banks, factoring, funds, and fintechs. TR + EN demo." />
 
   <style>
     :root{
       --bg:#0b1220;
-      --card:#111a2e;
-      --text:#eaf1ff;
-      --muted:#a6b3d1;
+      --bg2:#0f1b33;
+      --card:#0f1b2d;
+      --card2:#121f35;
+      --text:#eaf0ff;
+      --muted:#b9c6e6;
       --accent:#4c7dff;
-      --good:#22c55e;
+      --accent2:#22c55e;
+      --warn:#f59e0b;
+      --danger:#ef4444;
       --border:rgba(255,255,255,.10);
-      --radius:14px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
     }
     *{box-sizing:border-box}
-    body{background:var(--bg);color:var(--text);font-family:Arial, sans-serif;margin:0;padding:20px;}
-    .container{max-width:1050px;margin:0 auto;}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:16px;}
-    .top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;}
-    .brand{display:flex;align-items:center;gap:12px;}
-    .logo{width:64px;height:64px}
-    h1{margin:0;font-size:28px}
-    h2{margin:0 0 10px 0;font-size:20px}
-    h3{margin:18px 0 8px 0;font-size:16px}
-    p{margin:10px 0;line-height:1.55;color:rgba(234,241,255,.92)}
-    .muted{color:var(--muted)}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background: radial-gradient(1200px 600px at 10% 5%, rgba(76,125,255,.22), transparent 55%),
+                  radial-gradient(900px 500px at 90% 0%, rgba(34,197,94,.18), transparent 60%),
+                  linear-gradient(180deg, var(--bg), #070b14 70%);
+      min-height:100vh;
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1120px;margin:0 auto;padding:18px}
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:14px 16px;border:1px solid var(--border);border-radius:16px;
+      background: rgba(18,31,53,.55); backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      position: sticky; top: 10px; z-index: 10;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:44px;height:44px;border-radius:14px;display:grid;place-items:center;
+      background: linear-gradient(135deg, rgba(76,125,255,.25), rgba(34,197,94,.18));
+      border:1px solid var(--border);
+    }
+    .brand h1{font-size:16px;margin:0;letter-spacing:.2px}
+    .brand .sub{font-size:12px;color:var(--muted);margin-top:2px}
+    .actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
     .btn{
       border:1px solid var(--border);
-      background:rgba(255,255,255,.06);
+      background: rgba(255,255,255,.06);
       color:var(--text);
-      padding:10px 12px;
-      border-radius:12px;
-      cursor:pointer;
-      font-weight:800;
+      padding:10px 12px;border-radius:12px;cursor:pointer;
+      display:inline-flex;align-items:center;gap:8px;
+    }
+    .btn.primary{background: rgba(76,125,255,.18); border-color: rgba(76,125,255,.35)}
+    .btn.good{background: rgba(34,197,94,.14); border-color: rgba(34,197,94,.35)}
+    .btn:hover{filter:brightness(1.08)}
+    .pill{
+      font-size:12px;color:var(--muted);
+      padding:7px 10px;border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.05);
+    }
+
+    .hero{
+      margin-top:16px;
+      border:1px solid var(--border); border-radius:18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .heroInner{
+      display:grid;grid-template-columns: 1.2fr .8fr; gap:0;
+    }
+    .heroLeft{padding:22px}
+    .heroRight{
+      padding:22px;
+      background: radial-gradient(800px 350px at 20% 10%, rgba(76,125,255,.20), transparent 55%),
+                  radial-gradient(700px 350px at 90% 30%, rgba(34,197,94,.16), transparent 60%),
+                  rgba(0,0,0,.10);
+      border-left:1px solid var(--border);
+    }
+    .kicker{
+      display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+    .kicker .tag{
+      font-size:12px; padding:7px 10px; border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.18);
+      color: var(--muted);
+    }
+    .headline{
+      margin:0;
+      font-size:28px;
+      line-height:1.15;
+      letter-spacing:.2px;
+    }
+    .lead{
+      margin:12px 0 0;
+      color: var(--muted);
+      font-size:14.5px;
+      line-height:1.6;
+      max-width: 68ch;
+    }
+    .grid{
+      display:grid;gap:14px;
+      grid-template-columns: repeat(3, 1fr);
+      padding:16px;
+    }
+    .card{
+      border:1px solid var(--border);
+      background: rgba(18,31,53,.55);
+      border-radius:16px;
+      padding:14px;
+    }
+    .card h3{margin:0 0 6px;font-size:14px}
+    .card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
+
+    .section{
+      margin-top:16px;
+      border:1px solid var(--border);
+      border-radius:18px;
+      background: rgba(255,255,255,.04);
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    .section h2{margin:0 0 10px;font-size:18px}
+    .two{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    .list{
+      margin:8px 0 0;
+      padding:0 0 0 18px;
+      color: var(--muted);
+      font-size:13.5px;
+      line-height:1.65;
+    }
+    .note{
+      margin-top:10px;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.18);
+      color: var(--muted);
+      font-size:13px;
+      line-height:1.6;
+    }
+
+    .sim{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      padding:12px;border-radius:16px;
+      border:1px solid rgba(34,197,94,.35);
+      background: rgba(34,197,94,.10);
+      margin-top:12px;
+    }
+    .sim strong{font-size:14px}
+    .score{
+      display:flex;align-items:center;gap:10px
     }
     .badge{
-      display:inline-block;
-      margin-top:10px;
-      background:rgba(34,197,94,.18);
-      border:1px solid rgba(34,197,94,.35);
-      padding:8px 10px;
-      border-radius:12px;
-      font-weight:900;
-      color:#d9ffe7;
+      padding:6px 10px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      font-size:12px;color:var(--text)
     }
-    .pill{
-      display:inline-block;
-      background:rgba(76,125,255,.14);
-      border:1px solid rgba(76,125,255,.28);
-      padding:6px 10px;
-      border-radius:999px;
+    .bar{
+      width:160px;height:10px;border-radius:999px;background: rgba(255,255,255,.10);
+      overflow:hidden;border:1px solid rgba(255,255,255,.10)
+    }
+    .bar > div{
+      height:100%;
+      width:85%;
+      background: linear-gradient(90deg, rgba(34,197,94,.85), rgba(76,125,255,.75));
+    }
+
+    .pdfWrap{
+      border:1px solid var(--border);
+      border-radius:16px;
+      overflow:hidden;
+      background: rgba(0,0,0,.18);
+    }
+    iframe{display:block;border:0;width:100%}
+    .footer{
+      margin:18px 0 8px;
+      color: var(--muted);
       font-size:12px;
-      font-weight:800;
-      margin-right:8px;
-      margin-top:8px;
+      text-align:center;
     }
-    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
-    .hidden{display:none !important;}
-    iframe{width:100%;height:720px;border:none;border-radius:12px;margin-top:10px;background:#0b1220}
-    ul{margin:8px 0 0 18px;color:rgba(234,241,255,.92)}
-    li{margin:6px 0}
-    a.link{color:#cfe0ff}
-    .email{display:inline-block;background:#0b1220;border:1px solid var(--border);padding:8px 10px;border-radius:12px;margin-top:6px}
-    .callout{
-      margin-top:14px;
-      padding:16px;
-      border-radius:12px;
-      border:1px solid rgba(76,125,255,.35);
-      background:#0f172a;
+
+    /* language */
+    .langTR{display:block}
+    .langEN{display:none}
+    body.en .langTR{display:none}
+    body.en .langEN{display:block}
+
+    /* responsive */
+    @media (max-width: 920px){
+      .heroInner{grid-template-columns: 1fr}
+      .heroRight{border-left:none;border-top:1px solid var(--border)}
+      .grid{grid-template-columns: 1fr}
+      .two{grid-template-columns: 1fr}
+      .headline{font-size:24px}
+      .bar{width:120px}
     }
-    table{width:100%;border-collapse:collapse;margin-top:10px}
-    th,td{border:1px solid rgba(255,255,255,.12);padding:10px;text-align:left}
-    th{background:rgba(255,255,255,.05)}
-    .grid4{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
-    .miniCard{flex:1;min-width:200px;background:#0f172a;padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,.12)}
-    .miniCard h3{margin:0 0 6px 0;color:var(--accent)}
-    hr.sep{border:none;border-top:1px solid rgba(255,255,255,.10);margin:14px 0}
   </style>
 </head>
 
 <body>
-<div class="container">
-
-  <!-- HEADER -->
-  <div class="card">
-    <div class="top">
+  <div class="wrap">
+    <div class="topbar">
       <div class="brand">
-        <svg class="logo" viewBox="0 0 100 100" aria-label="RiskLens Logo">
-          <circle cx="50" cy="50" r="38" stroke="#4c7dff" stroke-width="5" fill="none"/>
-          <circle cx="50" cy="50" r="18" fill="#4c7dff"/>
-          <line x1="70" y1="70" x2="92" y2="92" stroke="#4c7dff" stroke-width="7" stroke-linecap="round"/>
-        </svg>
+        <div class="logo" aria-label="RiskLens logo">
+          <!-- Inline SVG logo (tek dosyada kalsın diye) -->
+          <svg width="26" height="26" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <path d="M32 6c14.4 0 26 11.6 26 26S46.4 58 32 58 6 46.4 6 32 17.6 6 32 6Z" stroke="rgba(255,255,255,.65)" stroke-width="2"/>
+            <path d="M12 34c6.5-10.5 13.2-15.8 20-15.8S45.5 23.5 52 34c-6.5 10.5-13.2 15.8-20 15.8S18.5 44.5 12 34Z" fill="rgba(76,125,255,.25)" stroke="rgba(255,255,255,.35)" stroke-width="2"/>
+            <circle cx="32" cy="34" r="7" fill="rgba(34,197,94,.55)" stroke="rgba(255,255,255,.45)" stroke-width="2"/>
+          </svg>
+        </div>
         <div>
           <h1>RiskLens</h1>
-          <div class="muted" style="font-size:12px;margin-top:4px;">Version: ONEFILE-ULTIMATE</div>
+          <div class="sub">Invoice Risk & Fraud Intelligence • TR / EN</div>
         </div>
       </div>
 
-      <button class="btn" id="langBtn" type="button">TR</button>
-    </div>
-
-    <!-- EN -->
-    <div id="EN">
-      <div class="callout">
-        <div class="muted" style="font-weight:900;">Killer Line (EN)</div>
-        <p style="font-size:18px;margin:6px 0 0 0;">
-          RiskLens is a global infrastructure platform that detects invoice fraud and provides real-time risk intelligence for banks, fintech, and Islamic finance.
-        </p>
-        <hr class="sep">
-        <div class="muted" style="font-weight:900;">Killer Line (TR)</div>
-        <p style="font-size:18px;margin:6px 0 0 0;">
-          RiskLens, bankalar, fintech ve katılım bankaları için fatura sahteciliğini tespit eden ve gerçek zamanlı risk zekâsı sağlayan global altyapı platformudur.
-        </p>
-      </div>
-
-      <p class="muted"><b>Global Fintech & Islamic Finance Risk Intelligence Infrastructure</b></p>
-
-      <p>
-        RiskLens is built for banks, fintech companies, SME finance institutions, and Islamic financial institutions.
-        It analyzes invoices, detects fraud signals, and produces risk scores.
-      </p>
-
-      <p>
-        RiskLens does <b>not</b> lend money, does <b>not</b> finance transactions, and does <b>not</b> apply interest.
-        It provides decision-support risk intelligence infrastructure.
-      </p>
-
-      <div class="badge">Risk Score Example: 85 / LOW RISK</div>
-
-      <div class="row">
-        <span class="pill">Enterprise Licensing</span>
-        <span class="pill">API Licensing</span>
-        <span class="pill">Fraud & Compliance</span>
-        <span class="pill">Islamic Finance Ready</span>
-        <span class="pill">SME Finance</span>
+      <div class="actions">
+        <span class="pill">Contact: <a href="mailto:42mehmetaltas@gmail.com">42mehmetaltas@gmail.com</a></span>
+        <button class="btn primary" id="toggleLang">TR / EN</button>
+        <a class="btn" href="#pdf">PDF</a>
+        <a class="btn good" href="mailto:42mehmetaltas@gmail.com?subject=RiskLens%20Investor%20Interest&body=Hello%20Mehmet%2C%0A%0AI%20reviewed%20RiskLens%20demo%20and%20would%20like%20to%20learn%20more.%0A%0A-%20Name%3A%0A-%20Company%3A%0A-%20Role%3A%0A-%20Country%3A%0A%0AThanks.">Email</a>
       </div>
     </div>
 
-    <!-- TR -->
-    <div id="TR" class="hidden">
-      <div class="callout">
-        <div class="muted" style="font-weight:900;">Killer Line</div>
-        <p style="font-size:18px;margin:6px 0 0 0;">
-          RiskLens, bankalar, fintech ve katılım bankaları için fatura sahteciliğini tespit eden ve gerçek zamanlı risk zekâsı sağlayan global altyapı platformudur.
-        </p>
-      </div>
+    <!-- HERO -->
+    <div class="hero">
+      <div class="heroInner">
+        <div class="heroLeft">
+          <div class="kicker">
+            <span class="tag">FinTech • SME</span>
+            <span class="tag">Bank / Factoring / Funds</span>
+            <span class="tag">Islamic Finance Ready</span>
+            <span class="tag">Scalable Licensing</span>
+          </div>
 
-      <p class="muted"><b>Küresel Fintech & Katılım Bankacılığı Risk Zekâsı Altyapısı</b></p>
+          <div class="langTR">
+            <h2 class="headline">Fatura Riski, Sahtecilik ve Kara Para Riskini Azaltan Karar Destek Altyapısı</h2>
+            <p class="lead">
+              RiskLens; faturayı <b>ödemeyen</b>, kredi vermeyen; yalnızca <b>risk skoru</b>, <b>sahtecilik sinyali</b> ve <b>uyumluluk kontrolleri</b> üreten
+              bir <b>altyapı/karar destek sistemidir</b>. Ödemeyi banka/faktoring/fon yapar; RiskLens ise karar kalitesini yükseltir.
+            </p>
+          </div>
 
-      <p>
-        RiskLens; bankalar, fintech şirketleri, KOBİ finansmanı ve katılım bankaları için tasarlanmış küresel altyapıdır.
-        Faturaları analiz eder, sahtecilik sinyallerini tespit eder ve risk skoru üretir.
-      </p>
+          <div class="langEN">
+            <h2 class="headline">Decision-Support Infrastructure for Invoice Risk, Fraud Detection & AML Signals</h2>
+            <p class="lead">
+              RiskLens <b>does not pay invoices</b> and does not issue credit. It is a <b>decision-support infrastructure</b> producing
+              <b>risk scores</b>, <b>fraud signals</b>, and <b>compliance checks</b>. Banks/factoring/funds can finance invoices; RiskLens improves decision quality.
+            </p>
+          </div>
 
-      <p>
-        RiskLens <b>kredi vermez</b>, <b>ödeme yapmaz</b>, <b>faiz üretmez</b>. Sadece karar destek risk zekâsı altyapısı sağlar.
-      </p>
+          <!-- SIMULATION -->
+          <div class="sim" aria-label="Risk score simulation">
+            <div>
+              <div class="langTR"><strong>Simülasyon:</strong> Risk Skoru Sonucu</div>
+              <div class="langEN"><strong>Simulation:</strong> Risk Score Output</div>
+              <div style="color:var(--muted);font-size:12.5px;margin-top:4px">
+                <span class="langTR">Örnek çıktı: “85 / Düşük Risk”</span>
+                <span class="langEN">Example output: “85 / Low Risk”</span>
+              </div>
+            </div>
+            <div class="score">
+              <div class="badge">85</div>
+              <div class="bar"><div></div></div>
+              <div class="badge" style="border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.10)">
+                <span class="langTR">Düşük Risk</span><span class="langEN">Low Risk</span>
+              </div>
+            </div>
+          </div>
 
-      <div class="badge">Risk Skoru Örneği: 85 / DÜŞÜK RİSK</div>
-
-      <div class="row">
-        <span class="pill">Kurumsal Lisans</span>
-        <span class="pill">API Lisansı</span>
-        <span class="pill">Sahtecilik & Uyum</span>
-        <span class="pill">Katılım Bankacılığı Uyumlu</span>
-        <span class="pill">KOBİ Finansmanı</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- WHY -->
-  <div class="card">
-    <div id="EN_Why">
-      <h2>Why RiskLens Exists</h2>
-      <p>
-        Financial institutions process massive invoice volumes. Fraud, fake invoices, and uncertainty create major losses.
-        RiskLens provides real-time risk intelligence infrastructure for faster, safer decisions.
-      </p>
-    </div>
-    <div id="TR_Why" class="hidden">
-      <h2>RiskLens Neden Var?</h2>
-      <p>
-        Finans kurumları çok büyük fatura hacmi yönetir. Naylon/sahte fatura ve belirsizlik ciddi kayıplar doğurur.
-        RiskLens daha hızlı ve daha güvenli karar için risk zekâsı altyapısı sağlar.
-      </p>
-    </div>
-  </div>
-
-  <!-- MARKET -->
-  <div class="card">
-    <div id="EN_Market">
-      <h2>Market Opportunity</h2>
-      <p>
-        Invoice-based finance is a multi-trillion-dollar market. Islamic finance is also multi-trillion and growing.
-        RiskLens targets banks, factoring companies, funds, and fintech platforms.
-      </p>
-    </div>
-    <div id="TR_Market" class="hidden">
-      <h2>Pazar Fırsatı</h2>
-      <p>
-        Fatura temelli finans trilyon dolarlık bir pazardır. Katılım bankacılığı/İslami finans pazarı da trilyon dolarlık ve büyümektedir.
-        RiskLens bankaları, faktoring şirketlerini, fonları ve fintech platformlarını hedefler.
-      </p>
-    </div>
-  </div>
-
-  <!-- ISLAMIC FINANCE (clear positioning) -->
-  <div class="card">
-    <div id="EN_Islamic">
-      <h2>Islamic Finance Compatibility</h2>
-      <p>
-        RiskLens provides <b>infrastructure</b> and <b>risk intelligence</b> only. It does not lend, does not charge interest, and does not finance.
-        This enables Sharia-friendly decision support for participation banks and Islamic finance institutions.
-      </p>
-      <ul>
-        <li>No interest-based operations</li>
-        <li>No lending or financing by RiskLens</li>
-        <li>Infrastructure / decision support only</li>
-        <li>Ready for global Islamic finance markets</li>
-      </ul>
-    </div>
-    <div id="TR_Islamic" class="hidden">
-      <h2>Katılım Bankacılığı Uyumu</h2>
-      <p>
-        RiskLens sadece <b>altyapı</b> ve <b>risk zekâsı</b> sağlar. Kredi vermez, faiz üretmez, ödeme yapmaz.
-        Bu sayede katılım bankaları için İslami prensiplere uygun karar destek altyapısı sunar.
-      </p>
-      <ul>
-        <li>Faiz içermez</li>
-        <li>RiskLens finansman sağlamaz</li>
-        <li>Sadece karar destek altyapısı</li>
-        <li>Küresel İslami finans pazarına uygundur</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- MODULES -->
-  <div class="card">
-    <div id="EN_Modules">
-      <h2>Platform Modules</h2>
-      <p>RiskLens is modular infrastructure. Each module expands revenue and intelligence capacity.</p>
-      <ul>
-        <li>Invoice Risk Scoring Engine</li>
-        <li>Fraud Detection Infrastructure</li>
-        <li>Islamic Finance Compliance Mode</li>
-        <li>SME Financial Risk Intelligence</li>
-        <li>Portfolio Risk Monitoring</li>
-        <li>Cybersecurity Risk Intelligence</li>
-        <li>Crypto Transaction Risk Analysis (future)</li>
-      </ul>
-    </div>
-    <div id="TR_Modules" class="hidden">
-      <h2>Platform Modülleri</h2>
-      <p>RiskLens modüler altyapıdır. Her modül yeni gelir ve karar zekâsı kapasitesi oluşturur.</p>
-      <ul>
-        <li>Fatura Risk Skorlama Motoru</li>
-        <li>Sahtecilik Tespit Altyapısı</li>
-        <li>Katılım Bankacılığı Uyum Modu</li>
-        <li>KOBİ Finansal Risk Zekâsı</li>
-        <li>Portföy Risk İzleme</li>
-        <li>Siber Güvenlik Risk Zekâsı</li>
-        <li>Kripto İşlem Risk Analizi (gelecek)</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- REVENUE STREAMS -->
-  <div class="card">
-    <div id="EN_Streams">
-      <h2>Revenue Streams</h2>
-      <ul>
-        <li>Enterprise infrastructure licensing (banks, fintech, SME finance)</li>
-        <li>API usage fees per invoice analysis</li>
-        <li>Fraud detection service licensing</li>
-        <li>Islamic finance compliance infrastructure licensing</li>
-        <li>Portfolio monitoring & analytics licensing</li>
-      </ul>
-      <p class="muted">Revenue grows as RiskLens becomes part of core infrastructure.</p>
-    </div>
-    <div id="TR_Streams" class="hidden">
-      <h2>Gelir Kaynakları</h2>
-      <ul>
-        <li>Banka/fintech/KOBİ finans kurumu kurumsal lisansları</li>
-        <li>Fatura başına API kullanım ücreti</li>
-        <li>Sahtecilik tespit lisans geliri</li>
-        <li>Katılım bankacılığı uyum altyapı lisansı</li>
-        <li>Portföy izleme & analitik lisansı</li>
-      </ul>
-      <p class="muted">RiskLens çekirdek altyapının parçası oldukça gelir büyür.</p>
-    </div>
-  </div>
-
-  <!-- ROADMAP -->
-  <div class="card">
-    <div id="EN_Roadmap">
-      <h2>Development Roadmap</h2>
-      <ul>
-        <li><b>Phase 1 (0–3 months):</b> MVP + pilot with fintech/factoring</li>
-        <li><b>Phase 2 (3–6 months):</b> Fraud signals + first paid integrations</li>
-        <li><b>Phase 3 (6–12 months):</b> Islamic finance mode + bank-grade integrations</li>
-        <li><b>Phase 4 (12–24 months):</b> Portfolio monitoring + regional scale (MENA)</li>
-        <li><b>Phase 5:</b> Cyber + crypto risk intelligence expansion</li>
-      </ul>
-    </div>
-    <div id="TR_Roadmap" class="hidden">
-      <h2>Gelişim Yol Haritası</h2>
-      <ul>
-        <li><b>Aşama 1 (0–3 ay):</b> MVP + fintech/faktoring pilot</li>
-        <li><b>Aşama 2 (3–6 ay):</b> Sahtecilik sinyalleri + ilk ücretli entegrasyonlar</li>
-        <li><b>Aşama 3 (6–12 ay):</b> Katılım uyum modu + banka seviyesi entegrasyon</li>
-        <li><b>Aşama 4 (12–24 ay):</b> Portföy izleme + bölgesel ölçek (MENA)</li>
-        <li><b>Aşama 5:</b> Siber + kripto risk zekâsı genişleme</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- REVENUE PROJECTION (high impact table) -->
-  <div class="card">
-    <div id="EN_Projection">
-      <h2>Revenue Projection (Illustrative)</h2>
-      <p class="muted">Infrastructure licensing + usage fees scale with institutional adoption.</p>
-      <table>
-        <tr>
-          <th>Year</th><th>Institutions</th><th>Revenue</th>
-        </tr>
-        <tr>
-          <td>Year 1</td><td>5</td><td>$250,000</td>
-        </tr>
-        <tr>
-          <td>Year 2</td><td>20</td><td>$1,500,000</td>
-        </tr>
-        <tr>
-          <td>Year 3</td><td>75</td><td>$8,000,000</td>
-        </tr>
-        <tr>
-          <td>Year 5</td><td>300+</td><td>$50,000,000+</td>
-        </tr>
-      </table>
-      <div class="callout">
-        <b>Investor Opportunity:</b> infrastructure companies scale with recurring revenue and can create strong exit potential.
-      </div>
-    </div>
-
-    <div id="TR_Projection" class="hidden">
-      <h2>Gelir Projeksiyonu (Örnek)</h2>
-      <p class="muted">Altyapı lisansı + kullanım ücretleri, kurum sayısı arttıkça büyür.</p>
-      <table>
-        <tr>
-          <th>Yıl</th><th>Kurum</th><th>Gelir</th>
-        </tr>
-        <tr>
-          <td>Yıl 1</td><td>5</td><td>$250,000</td>
-        </tr>
-        <tr>
-          <td>Yıl 2</td><td>20</td><td>$1,500,000</td>
-        </tr>
-        <tr>
-          <td>Yıl 3</td><td>75</td><td>$8,000,000</td>
-        </tr>
-        <tr>
-          <td>Yıl 5</td><td>300+</td><td>$50,000,000+</td>
-        </tr>
-      </table>
-      <div class="callout">
-        <b>Yatırımcı Fırsatı:</b> altyapı şirketleri tekrarlı gelirle büyür ve güçlü exit potansiyeli yaratır.
-      </div>
-    </div>
-  </div>
-
-  <!-- WHY NOW -->
-  <div class="card">
-    <div id="EN_WhyNow">
-      <h2>Why Now?</h2>
-      <p>
-        Fraud sophistication and compliance pressure are rising globally. Banks and fintechs must approve faster with higher accuracy.
-        RiskLens is built for this moment: real-time risk intelligence + fraud signals + scalable infrastructure licensing.
-      </p>
-      <ul>
-        <li>Regulatory tightening (AML/KYC)</li>
-        <li>Cross-border trade growth</li>
-        <li>AI-driven fraud escalation</li>
-      </ul>
-      <div class="callout"><b>The winners will be infrastructure providers, not single-product apps.</b></div>
-    </div>
-
-    <div id="TR_WhyNow" class="hidden">
-      <h2>Neden Şimdi?</h2>
-      <p>
-        Sahtecilik karmaşıklığı ve uyum (AML/KYC) baskısı artıyor. Bankalar daha hızlı ve daha doğru karar vermek zorunda.
-        RiskLens bu dönem için: gerçek zamanlı risk zekâsı + sahtecilik sinyali + altyapı lisansı.
-      </p>
-      <ul>
-        <li>AML/KYC sıkılaşması</li>
-        <li>Sınır ötesi ticaretin büyümesi</li>
-        <li>Yapay zekâ ile artan dolandırıcılık</li>
-      </ul>
-      <div class="callout"><b>Kazananlar tek ürün uygulamalar değil, altyapı sağlayıcıları olacak.</b></div>
-    </div>
-  </div>
-
-  <!-- PILOT PLAN -->
-  <div class="card">
-    <div id="EN_Pilot">
-      <h2>Pilot Plan / Go-to-Market</h2>
-      <p>
-        RiskLens enters through a controlled pilot with financial institutions in Dubai and global fintech hubs.
-        This proves infrastructure value before full scaling.
-      </p>
-      <h3>Phase 1 – Prototype Deployment</h3>
-      <ul>
-        <li>Deploy demo + scoring engine</li>
-        <li>Integrate with pilot partner (bank, factoring, fintech)</li>
-      </ul>
-      <h3>Phase 2 – Live Pilot</h3>
-      <ul>
-        <li>Score real invoices & detect fraud signals</li>
-        <li>Measure accuracy, speed, and partner ROI</li>
-      </ul>
-      <h3>Phase 3 – Commercial Launch</h3>
-      <ul>
-        <li>Convert pilot partner into licensed customer</li>
-        <li>Expand to additional institutions</li>
-      </ul>
-      <div class="callout">
-        <b>Timeline:</b> 90-day pilot • <b>First revenue:</b> 3–6 months • <b>Global scale:</b> 12–24 months
-      </div>
-    </div>
-
-    <div id="TR_Pilot" class="hidden">
-      <h2>Pilot Planı / Pazara Giriş</h2>
-      <p>
-        RiskLens Dubai ve global fintech merkezlerinde kontrollü pilot ile pazara girer.
-        Global ölçeklemeden önce altyapı değerini kanıtlar.
-      </p>
-      <h3>Faz 1 – Prototype Kurulum</h3>
-      <ul>
-        <li>Demo + skorlama motoru kurulum</li>
-        <li>Pilot partner entegrasyonu (banka/faktoring/fintech)</li>
-      </ul>
-      <h3>Faz 2 – Canlı Pilot</h3>
-      <ul>
-        <li>Gerçek faturaların analizi & sahtecilik sinyali</li>
-        <li>Doğruluk, hız ve ROI ölçümü</li>
-      </ul>
-      <h3>Faz 3 – Ticari Lansman</h3>
-      <ul>
-        <li>Pilotu lisanslı müşteriye dönüştürme</li>
-        <li>Yeni kurumlara ölçekleme</li>
-      </ul>
-      <div class="callout">
-        <b>Süre:</b> 90 gün • <b>İlk gelir:</b> 3–6 ay • <b>Küresel ölçek:</b> 12–24 ay
-      </div>
-    </div>
-  </div>
-
-  <!-- LIVE SIMULATION -->
-  <div class="card">
-    <div id="EN_Sim">
-      <h2>Live Risk Score Simulation</h2>
-      <p class="muted">Illustration of how RiskLens returns a score and decision signals.</p>
-      <div class="callout" style="border-color:rgba(34,197,94,.35);">
-        <p><b>Invoice ID:</b> INV-2026-RL-001</p>
-        <p><b>Company:</b> Global Trade Solutions LLC</p>
-        <p><b>Amount:</b> $148,500</p>
-        <p><b>Country:</b> UAE</p>
-        <p><b>Status:</b> <span style="color:var(--good);font-weight:900;">Verified</span></p>
-        <hr class="sep">
-        <p><b>Risk Score:</b></p>
-        <div style="background:#0b1220;padding:14px;border-radius:10px;border:1px solid rgba(34,197,94,.45);">
-          <span style="font-size:30px;font-weight:900;color:var(--good);">85 / 100</span>
-          <span style="margin-left:10px;font-weight:900;color:var(--good);">LOW RISK</span>
+          <div class="note">
+            <span class="langTR">
+              <b>Katılım bankacılığı uyumu:</b> RiskLens, faiz/ödemeye müdahil olmadan; <b>ticaretin gerçekliğini</b>, <b>fatura doğruluğunu</b> ve
+              <b>risk/uyumluluk sinyallerini</b> üretir. Bu yapı, katılım finansında “altyapı hizmeti” olarak konumlanabilir.
+            </span>
+            <span class="langEN">
+              <b>Islamic finance readiness:</b> RiskLens does not participate in interest-bearing lending or paying invoices. It produces
+              <b>trade authenticity</b>, <b>invoice integrity</b>, and <b>risk/compliance signals</b> — positioning as an infrastructure service for Islamic banks.
+            </span>
+          </div>
         </div>
-        <hr class="sep">
-        <p><b>Signals:</b></p>
-        <ul>
-          <li>No fraud signals detected</li>
-          <li>Verified business identity</li>
-          <li>Invoice structure valid</li>
-          <li>Low anomaly score</li>
+
+        <div class="heroRight">
+          <div class="langTR">
+            <h2 style="margin:0 0 10px;font-size:16px">Neden şimdi?</h2>
+            <ul class="list">
+              <li>Piyasada “naylon fatura”, karşılıksız ticaret ve suistimal örnekleri artıyor.</li>
+              <li>Banka/faktoring/fonlar karar verirken güvenilir risk sinyaline ihtiyaç duyuyor.</li>
+              <li>Tek bir entegrasyonla birçok kuruma lisans satılabilir (SaaS + kullanım bazlı).</li>
+            </ul>
+          </div>
+          <div class="langEN">
+            <h2 style="margin:0 0 10px;font-size:16px">Why now?</h2>
+            <ul class="list">
+              <li>Invoice fraud, fake trade, and abuse patterns are increasing.</li>
+              <li>Banks/factoring/funds need reliable risk signals to finance safely.</li>
+              <li>One integration can be licensed across multiple institutions (SaaS + usage-based).</li>
+            </ul>
+          </div>
+
+          <div class="card" style="margin-top:12px;background:rgba(0,0,0,.18)">
+            <h3 style="margin:0 0 6px;font-size:14px">Core Positioning</h3>
+            <p class="langTR">RiskLens = <b>altyapı</b> • Ödeme/Kredi = <b>finans kurumu</b> • RiskLens gelir modeli = <b>lisans + kullanım</b></p>
+            <p class="langEN">RiskLens = <b>infrastructure</b> • Payment/Credit = <b>financial institution</b> • Revenue = <b>license + usage</b></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3 class="langTR">1) Risk Skoru Motoru</h3>
+          <h3 class="langEN">1) Risk Scoring Engine</h3>
+          <p class="langTR">Vade, alıcı-satıcı ilişki, anomali, tutarlılık, geçmiş davranış sinyalleri ile risk üretir.</p>
+          <p class="langEN">Generates risk using maturity, buyer-seller patterns, anomalies, consistency, and historical signals.</p>
+        </div>
+        <div class="card">
+          <h3 class="langTR">2) Sahtecilik & Suistimal Sinyalleri</h3>
+          <h3 class="langEN">2) Fraud & Abuse Signals</h3>
+          <p class="langTR">Naylon fatura, döngü ticaret, şişirilmiş tutar, şüpheli eşleşme ve AML uyarıları.</p>
+          <p class="langEN">Detects fake invoices, circular trade, inflated amounts, suspicious matches, and AML red flags.</p>
+        </div>
+        <div class="card">
+          <h3 class="langTR">3) Lisansla Büyüyen Gelir</h3>
+          <h3 class="langEN">3) Revenue That Scales with Licensing</h3>
+          <p class="langTR">Bankalar/finans kurumları/fintech’ler için panel + API lisansı. Yeni kontrol modülleri = yeni gelir.</p>
+          <p class="langEN">Panel + API licensing for banks/institutions/fintechs. New control modules = new revenue streams.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTIONS -->
+    <div class="section" id="model">
+      <div class="langTR">
+        <h2>İş Modeli (Net ve “resmi tefecilik” değil)</h2>
+        <div class="two">
+          <div class="card">
+            <h3>RiskLens ne yapar?</h3>
+            <ul class="list">
+              <li>Fatura analizi + risk skoru üretir</li>
+              <li>Sahtecilik/uyumluluk sinyali verir</li>
+              <li>Karar destek raporu üretir</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>RiskLens ne yapmaz?</h3>
+            <ul class="list">
+              <li>Faturayı ödemez</li>
+              <li>Kredi vermez</li>
+              <li>Para dağıtmaz</li>
+            </ul>
+          </div>
+        </div>
+        <div class="note">
+          Bu yapı “kredi/tefecilik” değil; <b>altyapı yazılımı</b> ve <b>risk analizi hizmeti</b> modelidir.
+          Banka/faktoring/fon kendi mevzuatına göre finansman kararını verir.
+        </div>
+      </div>
+
+      <div class="langEN">
+        <h2>Business Model (Clear: not “lending/loan-sharking”)</h2>
+        <div class="two">
+          <div class="card">
+            <h3>What RiskLens does</h3>
+            <ul class="list">
+              <li>Invoice analysis + risk scoring</li>
+              <li>Fraud/compliance signals</li>
+              <li>Decision-support report</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>What RiskLens does NOT do</h3>
+            <ul class="list">
+              <li>Does not pay invoices</li>
+              <li>Does not lend money</li>
+              <li>Does not distribute capital</li>
+            </ul>
+          </div>
+        </div>
+        <div class="note">
+          This is a <b>software infrastructure</b> and <b>risk intelligence service</b>.
+          A bank/factoring/fund makes the financing decision under its own regulations.
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="growth">
+      <div class="langTR">
+        <h2>Katılım Bankaları için Özel Değer (İslami şartlara uygun yapı)</h2>
+        <ul class="list">
+          <li>Faize/ödemeye müdahil olmadan, <b>ticaretin gerçekliğini</b> ve <b>fatura doğruluğunu</b> ölçer.</li>
+          <li>Murabaha/işlem bazlı finansmanlarda “işlem riski”ni azaltır.</li>
+          <li>Uyum ve itibar riski düşer; kurum içi onay süresi hızlanır.</li>
+        </ul>
+
+        <h2 style="margin-top:14px">RiskLens büyüdükçe nereye gider?</h2>
+        <ul class="list">
+          <li>Yeni paneller: AML/KYC risk, tedarik zinciri risk, siber güvenlik sinyalleri</li>
+          <li>Yeni gelir: her yeni modül = ek lisans + kullanım ücreti</li>
+          <li>Global entegrasyon: bankalar + fintech platformları + fonlar</li>
+        </ul>
+      </div>
+
+      <div class="langEN">
+        <h2>Special Value for Islamic Banks (Sharia-ready structure)</h2>
+        <ul class="list">
+          <li>Without engaging in interest/payment: measures <b>trade authenticity</b> and <b>invoice integrity</b>.</li>
+          <li>Reduces transaction risk for trade-based finance structures.</li>
+          <li>Lowers compliance/reputation risk and speeds internal approvals.</li>
+        </ul>
+
+        <h2 style="margin-top:14px">Where does RiskLens expand?</h2>
+        <ul class="list">
+          <li>New dashboards: AML/KYC risk, supply-chain risk, cybersecurity signals</li>
+          <li>New revenue: each new module = add-on license + usage fees</li>
+          <li>Global integration: banks + fintech platforms + funds</li>
         </ul>
       </div>
     </div>
 
-    <div id="TR_Sim" class="hidden">
-      <h2>Canlı Risk Skoru Simülasyonu</h2>
-      <p class="muted">RiskLens’in skor ve karar sinyali üretimine örnek.</p>
-      <div class="callout" style="border-color:rgba(34,197,94,.35);">
-        <p><b>Fatura No:</b> INV-2026-RL-001</p>
-        <p><b>Firma:</b> Global Trade Solutions LLC</p>
-        <p><b>Tutar:</b> $148,500</p>
-        <p><b>Ülke:</b> BAE</p>
-        <p><b>Durum:</b> <span style="color:var(--good);font-weight:900;">Doğrulandı</span></p>
-        <hr class="sep">
-        <p><b>Risk Skoru:</b></p>
-        <div style="background:#0b1220;padding:14px;border-radius:10px;border:1px solid rgba(34,197,94,.45);">
-          <span style="font-size:30px;font-weight:900;color:var(--good);">85 / 100</span>
-          <span style="margin-left:10px;font-weight:900;color:var(--good);">DÜŞÜK RİSK</span>
-        </div>
-        <hr class="sep">
-        <p><b>Sinyaller:</b></p>
-        <ul>
-          <li>Sahtecilik sinyali yok</li>
-          <li>Firma kimliği doğrulandı</li>
-          <li>Fatura yapısı geçerli</li>
-          <li>Düşük anomali skoru</li>
+    <div class="section" id="resilience">
+      <div class="langTR">
+        <h2>Dayanıklılık (siber saldırı, internet kesintisi, kriz senaryosu)</h2>
+        <ul class="list">
+          <li>Bulut + yedekleme + loglama + WAF/Rate limit</li>
+          <li>Offline/queued işlem: bağlantı gelince senkron</li>
+          <li>Yetkilendirme: kurum bazlı erişim, denetim izleri</li>
+        </ul>
+      </div>
+      <div class="langEN">
+        <h2>Resilience (cyber attacks, outages, crisis scenarios)</h2>
+        <ul class="list">
+          <li>Cloud + backups + logging + WAF/rate limiting</li>
+          <li>Offline/queued operations synced when connectivity returns</li>
+          <li>Institution-based access control & audit trails</li>
         </ul>
       </div>
     </div>
-  </div>
 
-  <!-- PARTNER READY -->
-  <div class="card">
-    <div id="EN_Partners">
-      <h2>Partner Ready / Pilot Partners</h2>
-      <p>
-        RiskLens is open for pilot partnerships with banks, Islamic banks, fintech platforms, and factoring institutions.
-        We offer a controlled 90-day pilot to prove impact.
-      </p>
-      <div class="grid4">
-        <div class="miniCard"><h3>Banks</h3><div>Commercial banks / Islamic banks</div></div>
-        <div class="miniCard"><h3>Fintech</h3><div>Invoice finance platforms</div></div>
-        <div class="miniCard"><h3>Factoring</h3><div>Factoring companies</div></div>
-        <div class="miniCard"><h3>Funds</h3><div>Funds & institutions</div></div>
+    <!-- PDF EMBED -->
+    <div class="section" id="pdf">
+      <div class="langTR">
+        <h2>Yatırımcı Dosyası (PDF)</h2>
+        <p class="lead" style="margin:0 0 10px">
+          Aşağıda PDF önizlemesi var. Açılmazsa alttaki “PDF’yi Aç” butonuna tıkla.
+        </p>
+      </div>
+      <div class="langEN">
+        <h2>Investor File (PDF)</h2>
+        <p class="lead" style="margin:0 0 10px">
+          PDF preview is embedded below. If it doesn’t load, use “Open PDF”.
+        </p>
+      </div>
+
+      <div class="actions" style="margin-bottom:10px">
+        <a class="btn primary" href="https://drive.google.com/file/d/1mbKvLr0G_hglcCIttU68LiJ-sh-Ws4Mz/view?usp=drivesdk" target="_blank" rel="noopener">Open PDF</a>
+        <a class="btn" href="mailto:42mehmetaltas@gmail.com?subject=RiskLens%20PDF%20Request&body=Hello%20Mehmet%2C%0A%0AI%20reviewed%20RiskLens%20demo%20and%20would%20like%20the%20latest%20investor%20package.%0A%0AThanks.">Request via Email</a>
+      </div>
+
+      <div class="pdfWrap">
+        <!-- Google Drive embed: /preview -->
+        <iframe
+          src="https://drive.google.com/file/d/1mbKvLr0G_hglcCIttU68LiJ-sh-Ws4Mz/preview"
+          height="820"
+          loading="lazy"
+          title="RiskLens Investor PDF">
+        </iframe>
       </div>
     </div>
 
-    <div id="TR_Partners" class="hidden">
-      <h2>Pilot Ortaklık / Kurum İş Birliği</h2>
-      <p>
-        RiskLens; bankalar, katılım bankaları, fintech platformları ve faktoring kurumları ile pilot ortaklığa açıktır.
-        90 günlük kontrollü pilot ile etki kanıtlanır.
-      </p>
-      <div class="grid4">
-        <div class="miniCard"><h3>Bankalar</h3><div>Banka / Katılım bankası</div></div>
-        <div class="miniCard"><h3>Fintech</h3><div>Fatura finans platformları</div></div>
-        <div class="miniCard"><h3>Faktoring</h3><div>Faktoring şirketleri</div></div>
-        <div class="miniCard"><h3>Fonlar</h3><div>Fon ve kurumlar</div></div>
+    <div class="section" id="contact">
+      <div class="langTR">
+        <h2>İletişim</h2>
+        <div class="note">
+          <b>E-posta:</b> <a href="mailto:42mehmetaltas@gmail.com">42mehmetaltas@gmail.com</a><br/>
+          <b>Demo:</b> <a href="https://mehmetaltas.github.io/invoice-risklens/" target="_blank" rel="noopener">mehmetaltas.github.io/invoice-risklens/</a>
+        </div>
+      </div>
+      <div class="langEN">
+        <h2>Contact</h2>
+        <div class="note">
+          <b>Email:</b> <a href="mailto:42mehmetaltas@gmail.com">42mehmetaltas@gmail.com</a><br/>
+          <b>Demo:</b> <a href="https://mehmetaltas.github.io/invoice-risklens/" target="_blank" rel="noopener">mehmetaltas.github.io/invoice-risklens/</a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- WHY BANKS PAY -->
-  <div class="card">
-    <div id="EN_BanksPay">
-      <h2>Why Banks Will Pay RiskLens</h2>
-      <ul>
-        <li>Reduce fraud losses</li>
-        <li>Increase decision speed</li>
-        <li>Improve transaction safety</li>
-        <li>Strengthen compliance posture</li>
-        <li>Recurring revenue once integrated</li>
-      </ul>
-    </div>
-    <div id="TR_BanksPay" class="hidden">
-      <h2>Bankalar Neden RiskLens’e Öder?</h2>
-      <ul>
-        <li>Sahtecilik zararını azaltır</li>
-        <li>Karar hızını artırır</li>
-        <li>İşlem güvenliğini yükseltir</li>
-        <li>Uyum (compliance) gücünü artırır</li>
-        <li>Entegre olunca tekrarlı gelire dönüşür</li>
-      </ul>
+    <div class="footer">
+      © <span id="yy"></span> RiskLens • Invoice Risk & Fraud Intelligence • TR/EN Demo
     </div>
   </div>
 
-  <!-- COMPETITIVE ADV -->
-  <div class="card">
-    <div id="EN_Adv">
-      <h2>Competitive Advantage</h2>
-      <ul>
-        <li>Infrastructure-first design (not a lender)</li>
-        <li>Islamic finance compatible architecture</li>
-        <li>Modular platform → multiple sectors & revenue lines</li>
-        <li>Licensing + usage-based scalable model</li>
-      </ul>
-    </div>
-    <div id="TR_Adv" class="hidden">
-      <h2>Rekabet Avantajı</h2>
-      <ul>
-        <li>Altyapı odaklı (kredi/tefecilik değil)</li>
-        <li>Katılım bankacılığı/İslami finans uyumu</li>
-        <li>Modüler platform → çoklu gelir kanalı</li>
-        <li>Lisans + kullanım bazlı ölçeklenebilir model</li>
-      </ul>
-    </div>
-  </div>
+  <script>
+    // year
+    document.getElementById('yy').textContent = new Date().getFullYear();
 
-  <!-- EXIT -->
-  <div class="card">
-    <div id="EN_Exit">
-      <h2>Exit Strategy</h2>
-      <ul>
-        <li>Acquisition by global fintech companies</li>
-        <li>Acquisition by banks & financial institutions</li>
-        <li>Acquisition by cybersecurity/tech companies</li>
-        <li>IPO</li>
-      </ul>
-    </div>
-    <div id="TR_Exit" class="hidden">
-      <h2>Çıkış Stratejisi</h2>
-      <ul>
-        <li>Global fintech şirketlerine satış</li>
-        <li>Banka/finans kurumlarına satış</li>
-        <li>Siber/teknoloji şirketlerine satış</li>
-        <li>Halka arz (IPO)</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- PDF -->
-  <div class="card">
-    <div id="EN_Pdf">
-      <h2>Investor Pitch Deck (Embedded)</h2>
-      <p class="muted">If the PDF doesn’t render on some devices, open it in a new tab.</p>
-    </div>
-    <div id="TR_Pdf" class="hidden">
-      <h2>Yatırımcı Sunumu (Gömülü)</h2>
-      <p class="muted">Bazı cihazlarda görünmezse yeni sekmede açabilirsiniz.</p>
-    </div>
-
-    <iframe
-      src="https://drive.google.com/file/d/1mbKvLr0G_hglcCIttU68LiJ-sh-Ws4Mz/preview"
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-
-    <p style="margin-top:10px">
-      <a class="link" target="_blank" rel="noopener"
-         href="https://drive.google.com/file/d/1mbKvLr0G_hglcCIttU68LiJ-sh-Ws4Mz/view">
-        Open PDF in new tab
-      </a>
-    </p>
-  </div>
-
-  <!-- CONTACT -->
-  <div class="card">
-    <div id="EN_Contact">
-      <h2>Contact</h2>
-      <div class="email">42mehmetaltas@gmail.com</div>
-      <p class="muted" style="margin-top:10px;">
-        Next trust upgrade: domain email (founder@risklens.ai)
-      </p>
-    </div>
-    <div id="TR_Contact" class="hidden">
-      <h2>İletişim</h2>
-      <div class="email">42mehmetaltas@gmail.com</div>
-      <p class="muted" style="margin-top:10px;">
-        Güven artırımı için sonraki adım: domain email (founder@risklens.ai)
-      </p>
-    </div>
-  </div>
-
-</div>
-
-<script>
-  (function(){
-    const btn = document.getElementById("langBtn");
-
-    const enRoot = document.getElementById("EN");
-    const trRoot = document.getElementById("TR");
-
-    const enIds = ["EN_Why","EN_Market","EN_Islamic","EN_Modules","EN_Streams","EN_Roadmap","EN_Projection","EN_WhyNow","EN_Pilot","EN_Sim","EN_Partners","EN_BanksPay","EN_Adv","EN_Exit","EN_Pdf","EN_Contact"];
-    const trIds = ["TR_Why","TR_Market","TR_Islamic","TR_Modules","TR_Streams","TR_Roadmap","TR_Projection","TR_WhyNow","TR_Pilot","TR_Sim","TR_Partners","TR_BanksPay","TR_Adv","TR_Exit","TR_Pdf","TR_Contact"];
-
-    function show(ids){ ids.forEach(id => document.getElementById(id).classList.remove("hidden")); }
-    function hide(ids){ ids.forEach(id => document.getElementById(id).classList.add("hidden")); }
-
-    let current = "EN";
-
-    function setLang(lang){
-      if(lang === "TR"){
-        enRoot.classList.add("hidden");
-        trRoot.classList.remove("hidden");
-        hide(enIds); show(trIds);
-        btn.textContent = "EN";
-        document.documentElement.lang = "tr";
-        current = "TR";
-      } else {
-        trRoot.classList.add("hidden");
-        enRoot.classList.remove("hidden");
-        hide(trIds); show(enIds);
-        btn.textContent = "TR";
-        document.documentElement.lang = "en";
-        current = "EN";
-      }
+    // language toggle
+    const btn = document.getElementById('toggleLang');
+    function setLang(en){
+      document.body.classList.toggle('en', !!en);
+      document.documentElement.lang = en ? 'en' : 'tr';
+      localStorage.setItem('risklens_lang', en ? 'en' : 'tr');
     }
-
-    btn.addEventListener("click", function(){
-      setLang(current === "EN" ? "TR" : "EN");
+    btn.addEventListener('click', () => {
+      setLang(!document.body.classList.contains('en'));
     });
-
-    // default EN
-    setLang("EN");
-  })();
-</script>
-
+    // restore
+    const saved = localStorage.getItem('risklens_lang');
+    setLang(saved === 'en');
+  </script>
 </body>
   </html>
